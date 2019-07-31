@@ -1,15 +1,15 @@
 package com.example.demofunc;
 
-import com.example.demofunc.func.ConsoleConsumer;
-import com.example.demofunc.func.GreetingFunc;
-import org.springframework.boot.SpringBootConfiguration;
+import com.example.demofunc.aws.GreetingAwsFunc;
+import com.example.demofunc.func.greeting.GreetingFunc;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.function.context.FunctionRegistration;
 import org.springframework.cloud.function.context.FunctionType;
 import org.springframework.cloud.function.context.FunctionalSpringApplication;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.support.GenericApplicationContext;
 
-@SpringBootConfiguration
+@SpringBootApplication
 public class DemoFuncApplication implements ApplicationContextInitializer<GenericApplicationContext> {
 
     public static void main(String[] args) {
@@ -32,14 +32,30 @@ public class DemoFuncApplication implements ApplicationContextInitializer<Generi
                         .type(FunctionType.supplier(String.class)));
         */
 
-        context.registerBean(FunctionRegistration.class,
-                () -> new FunctionRegistration<>(new GreetingFunc())
-                        .name("greeting")
-                        .type(FunctionType.from(String.class).to(String.class)));
-
+        /*
         context.registerBean(FunctionRegistration.class,
                 () -> new FunctionRegistration<>(new ConsoleConsumer())
                         .name("console")
                         .type(FunctionType.consumer(String.class)));
+         */
+
+        /*
+        context.registerBean(FunctionRegistration.class,
+                () -> new FunctionRegistration<>(new GreetingFunc())
+                        .name("greeting")
+                        .type(FunctionType.from(String.class).to(String.class)));
+        */
+
+        /*
+        context.registerBean(FunctionRegistration.class,
+                () -> new FunctionRegistration<>(new GreetingAwsFunc()).name("greeting-msg")
+                        .type(FunctionType.of(GreetingAwsFunc.class))
+        );
+         */
+
+        context.registerBean(FunctionRegistration.class,
+                () -> new FunctionRegistration<>(new GreetingAwsFunc()).name("greeting-msg")
+                        .type(FunctionType.of(GreetingAwsFunc.class))
+        );
     }
 }
