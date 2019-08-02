@@ -1,5 +1,6 @@
 package com.example.demofunc.func.greeting;
 
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.function.Function;
 
@@ -12,6 +13,6 @@ import java.util.function.Function;
 public class GreetingFunc implements Function<GreetingRequest, GreetingResponse> {
     @Override
     public GreetingResponse apply(GreetingRequest request) {
-        return new GreetingResponse("Hola " + request.getName(), ZonedDateTime.now());
+        return new GreetingResponse("Hola " + request.getName(), Instant.now());
     }
 }

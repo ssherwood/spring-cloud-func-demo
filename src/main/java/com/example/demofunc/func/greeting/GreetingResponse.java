@@ -1,17 +1,17 @@
 package com.example.demofunc.func.greeting;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.time.ZonedDateTime;
+import java.time.Instant;
+import java.time.LocalDateTime;
 
 public class GreetingResponse {
     private String value;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZZ", timezone = "UTC")
-    private ZonedDateTime timestamp;
+    private Long timestamp;
+    private LocalDateTime localDateTime;
 
-    public GreetingResponse(String value, ZonedDateTime timestamp) {
+    public GreetingResponse(String value, Instant timestamp) {
         this.value = value;
-        this.timestamp = timestamp;
+        this.timestamp = timestamp.toEpochMilli();
+        this.localDateTime = LocalDateTime.now();
     }
 
     public String getValue() {
@@ -22,11 +22,19 @@ public class GreetingResponse {
         this.value = value;
     }
 
-    public ZonedDateTime getTimestamp() {
+    public Long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(ZonedDateTime timestamp) {
+    public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 }
