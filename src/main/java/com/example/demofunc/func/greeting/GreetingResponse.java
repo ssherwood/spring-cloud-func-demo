@@ -1,17 +1,14 @@
 package com.example.demofunc.func.greeting;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 
 public class GreetingResponse {
     private String value;
     private Long timestamp;
-    private LocalDateTime localDateTime;
 
-    public GreetingResponse(String value, Instant timestamp) {
+    public GreetingResponse(String value) {
         this.value = value;
-        this.timestamp = timestamp.toEpochMilli();
-        this.localDateTime = LocalDateTime.now();
+        this.timestamp = Instant.now().toEpochMilli();
     }
 
     public String getValue() {
@@ -28,13 +25,5 @@ public class GreetingResponse {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
-    }
-
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
     }
 }
